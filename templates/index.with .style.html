@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Yes or No</title>
+  <style>
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Click Yes or No</h1>
+  
+  <button id="yesButton" class="button">Yes</button>
+  <button id="noButton" class="button">No</button>
+
+  <script>
+    var yesButton = document.getElementById("yesButton");
+    var noButton = document.getElementById("noButton");
+
+    yesButton.addEventListener("click", function() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "http://localhost:5000/yes-endpoint", true); // Replace with your Flask server URL
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log(xhr.responseText); // Display the response from the server
+          // Update the page based on the response
+          document.body.innerHTML = xhr.responseText;
+        }
+      };
+      xhr.send();
+    });
+
+    noButton.addEventListener("click", function() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "http://localhost:5000/no-endpoint", true); // Replace with your Flask server URL
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log(xhr.responseText); // Display the response from the server
+          // Update the page based on the response
+          document.body.innerHTML = xhr.responseText;
+        }
+      };
+      xhr.send();
+    });
+  </script>
+</body>
+</html>
